@@ -61,7 +61,7 @@ Sample response:-
 }
 
 
-Error:
+Error: Create Short Url
 1. when query parameter url is empty:-
 
 request:
@@ -101,6 +101,31 @@ response:
     "message": "Request param url is missing.",
     "status": "error"
 }
+
+
+4. when alias is duplicate or used in other url shorten.
+
+request:
+GET /api/v1/create?url=https://github.com/&alias=FRIENDS HTTP/1.1
+Host: goshort.in
+Content-Type: application/json
+
+response:
+{
+    "alias": "FRIENDS",
+    "message": "Alias is already used.",
+    "ori_url": "https://github.com/",
+    "short_url": "goshort.in/FRIENDS",
+    "status": "error"
+}
+
+
+3. 
+
+
+
+
+
 
 
 
