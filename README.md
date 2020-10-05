@@ -1,8 +1,12 @@
 # Goshort.in-apis
 Api description for goshort.in
 
+############################################################
 
 1. Create a short url without alias:
+
+############################################################
+
 Alias is alternate name of short url.By default there will a unique hash generated to url. If you want your custom name then use this query param in request.
 
 GET /api/v1/create?url=type_your_url_here  HTTP/1.1
@@ -120,7 +124,86 @@ response:
 }
 
 
-3. 
+##############################
+3. Track the shorten url
+##############################
+This api used to track the shorten url and also gives the information like click_count, original url , shorten url and a message for status.
+
+GET /api/v1/track?hash=random_hash/alias HTTP/1.1
+Host: goshort.in
+Content-Type: application/json
+
+Parameter
+hash : random hash / alias for url.
+datatype: string
+example: FRIEND, Github
+
+Sample request:-
+GET /api/v1/track?hash=FRIEND HTTP/1.1
+Host: goshort.in
+Content-Type: application/json
+
+
+Sample response:- 
+{
+    "click_count": 10,
+    "hash": "FRIEND",
+    "message": "Url clicked 10 times.",
+    "ori_url": "https://www.youtube.com/watch?v=CY8E6N5Nzec",
+    "short_url": "goshort.in/FRIEND",
+    "status": "success"
+}
+
+##############################
+
+Error: Track Short Url
+
+##############################
+1. when request param hash is missing.
+
+request:
+GET /api/v1/track HTTP/1.1
+Host: goshort.in
+Content-Type: application/json
+
+response:
+{
+    "message": "Request parameter(s) [hash] is blank or wrong.",
+    "status": "error"
+}
+
+
+2. when request param hash is blank.
+
+request:
+GET /api/v1/track?hash=blank HTTP/1.1
+Host: goshort.in
+Content-Type: application/json
+
+response:
+{
+    "message": "Request parameter(s) [hash] is blank or wrong.",
+    "status": "error"
+}
+
+3. when wrong hash is passed in query param.
+
+request:
+GET /api/v1/track?hash=Randomhash HTTP/1.1
+Host: goshort.in
+Content-Type: application/json
+
+response:
+{
+    "hash": "Randomhash",
+    "message": "Url not found.",
+    "status": "error"
+}
+
+
+
+
+
 
 
 
